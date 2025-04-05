@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Anniversary My Love 💑</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+      color: #fff;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    section {
+      min-height: 100vh;
+      padding: 50px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    h1, h2 {
+      font-family: 'Dancing Script', cursive;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      margin-bottom: 30px;
+    }
+    button {
+      margin-top: 30px;
+      padding: 15px 40px;
+      background: rgba(255,255,255,0.9);
+      color: #ff4f81;
+      border: none;
+      border-radius: 30px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 15px rgba(0,0,0,0.2);
+      background: #fff;
+    }
+    img {
+      max-width: 350px;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    img:hover {
+      transform: scale(1.05);
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      padding: 40px;
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .gallery img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 15px;
+      border: 3px solid rgba(255,255,255,0.8);
+      transition: all 0.5s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .gallery img.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 20px;
+      }
+      .gallery img {
+        height: 200px;
+      }
+    }
+    @media (max-width: 480px) {
+      .gallery {
+        grid-template-columns: repeat(1, 1fr);
+      }
+      .gallery img {
+        height: 250px;
+      }
+    }
+    .card {
+      background: rgba(255,255,255,0.95);
+      color: #ff4f81;
+      padding: 30px 40px;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      backdrop-filter: blur(10px);
+      margin-top: 30px;
+      min-width: 300px;
+    }
+    .cursor-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      font-size: 24px;
+      filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+      animation: floatHeart 1.2s ease-out forwards;
+      transform-origin: center center;
+      transform: translate(-50%, -50%);
+    }
+    @keyframes floatHeart {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); }
+      50% { opacity: 0.8; transform: translate(-50%, -80%) scale(1.2); }
+      100% { opacity: 0; transform: translate(-50%, -120%) scale(1); }
+    }
+    .music-bubble {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      z-index: 1000;
+      animation: pulse 2s infinite;
+    }
+    .music-bubble i {
+      font-size: 24px;
+      color: #ff4f81;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    /* Scroll Animation Classes */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .scale-in {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.8s ease;
+    }
+    .scale-in.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .floating-heart {
+      position: fixed;
+      color: #fff;
+      font-size: 20px;
+      pointer-events: none;
+      animation: float-up 4s linear forwards;
+      text-shadow: 2px 2px 4px rgba(255, 79, 129, 0.4);
+    }
+
+    @keyframes float-up {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--tx), -100vh) rotate(360deg);
+      }
+    }
+
+    /* Welcome Screen Styles */
+    #welcome-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .envelope {
+      width: 200px;
+      height: 130px;
+      background: #fff;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      transform-style: preserve-3d;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .envelope:hover {
+      transform: scale(1.05) translateY(-10px);
+    }
+
+    .envelope::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+      border-top: 65px solid #f5f5f5;
+      transform-origin: top;
+      transition: transform 0.4s ease;
+    }
+
+    .envelope:hover::before {
+      transform: rotateX(180deg);
+    }
+
+    .envelope::after {
+      content: '❤️';
+      position: absolute;
+      bottom: 40%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Dancing Script', cursive;
+      font-size: 16px;
+      color: #ff4f81;
+    }
+
+    #main-content {
+      display: none;
+    }
+
+    .fade-out {
+      animation: fadeOut 1s forwards;
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    /* Password Overlay Styles */
+    .password-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .password-container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 300px;
+      width: 90%;
+    }
+
+    .password-container h3 {
+      color: #ff4f81;
+      margin-bottom: 20px;
+    }
+
+    .password-container input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #ff4f81;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    .password-container button {
+      margin-top: 15px;
+      width: 100%;
+    }
+
+    .password-container .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Add Welcome Screen -->
+  <div id="welcome-screen">
+    <div class="envelope" onclick="openEnvelope()"></div>
+  </div>
+
+  <!-- Add password overlay -->
+  <div class="password-overlay">
+    <div class="password-container">
+      <h3>Enter Password</h3>
+      <input type="password" id="password-input" placeholder="Enter your password">
+      <button onclick="checkPassword()">Submit</button>
+      <p class="error-message">Wrong password, please try again!</p>
+    </div>
+  </div>
+
+  <!-- Wrap existing content in main-content div -->
+  <div id="main-content">
+    <section id="home">
+      <h1 class="fade-in">Happy Anniversary</h1>
+      <h1 class="fade-in"> My Love💑</h1>
+      <h2 class="fade-in">06 April 2025</h2>
+      <img src="1.jpg" alt="Us" class="scale-in">
+      <p class="fade-in">Selamat anniversary sayangku ❤️</p>
+      <p class="fade-in">Setiap detik, menit, dan jam yang kita lalui bersama adalah hadiah terindah bagiku. Kamu adalah alasan aku tersenyum setiap pagi dan motivasiku untuk menjadi lebih baik setiap harinya.</p>
+      <p class="fade-in">Terima kasih telah menjadi pasangan terbaik yang bisa kuimpikan. Bersamamu, setiap tantangan terasa lebih ringan dan setiap kebahagiaan terasa lebih sempurna.</p>
+      <p class="fade-in">Mari kita tuliskan lebih banyak cerita indah di lembar-lembar kehidupan kita selanjutnya.</p>
+      <p class="fade-in">I love you more today than yesterday, but less than tomorrow 💕</p>
+    </section>
+
+    <section id="about">
+      <h2 class="fade-in">Our Journey Together</h2>
+      <div class="card scale-in">
+        <p>Dari hari pertama kita bertemu, setiap detik bersamamu adalah anugerah terindah dalam hidupku. Senyummu selalu menjadi alasanku untuk tersenyum, dan cintamu adalah kekuatan yang membuatku bertahan dalam setiap rintangan.</p>
+        <p>Setiap tahun bersamamu membuat hidupku semakin bermakna. Kita telah melewati suka dan duka, tawa dan air mata, dan semuanya menjadi kisah indah yang tak terlupakan.</p>
+        <p>Di hari anniversary kita yang istimewa ini, aku ingin mengucapkan terima kasih atas semua cinta, kesabaran, dan ketulusanmu. Kamu adalah hadiah terindah yang Tuhan berikan untukku. 💕</p>
+        <p>Semoga cinta kita akan terus tumbuh dan berkembang, seperti bunga yang selalu mekar di musim semi. Mari kita ukir lebih banyak kenangan indah di tahun-tahun mendatang. I love you, always and forever! 💑</p>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <h2>Our Precious Moments</h2>
+      <div class="gallery">
+        <img src="20.jpg" alt="Moment 1">
+        <img src="19.jpg" alt="Moment 2">
+        <img src="18.jpg" alt="Moment 3">
+        <img src="17.jpg" alt="Moment 4">
+        <img src="16.jpg" alt="Moment 5">
+        <img src="15.jpg" alt="Moment 6">
+        <img src="14.jpg" alt="Moment 7">
+        <img src="13.jpg" alt="Moment 8">
+        <img src="12.jpg" alt="Moment 9">
+        <img src="11.jpg" alt="Moment 10">
+        <img src="10.jpg" alt="Moment 11">
+        <img src="9.jpg" alt="Moment 12">
+        <img src="8.jpg" alt="Moment 13">
+        <img src="7.jpg" alt="Moment 14">
+        <img src="6.jpg" alt="Moment 15">
+        <img src="5.jpg" alt="Moment 16">
+        <img src="4.jpg" alt="Moment 17">
+        <img src="3.jpg" alt="Moment 18">
+        <img src="2.jpg" alt="Moment 19">
+        <img src="1.jpg" alt="Moment 20">
+      </div>
+    </section>
+
+    <!-- Music Control -->
+    <div class="music-bubble" onclick="toggleMusic()">
+      <i class="fas fa-music"></i>
+    </div>
+    <audio id="bgMusic" loop>
+      <source src="one_only.mp3" type="audio/mp3" autoplay>
+    </audio>
+  </div>
+
+  <script>
+    const correctPassword = "arsixpyyca"; // Change this to your desired password
+
+    function openEnvelope() {
+      document.querySelector('.password-overlay').style.display = 'flex';
+    }
+
+    function checkPassword() {
+      const input = document.getElementById('password-input');
+      const errorMsg = document.querySelector('.error-message');
+      
+      if (input.value === correctPassword) {
+        document.querySelector('.password-overlay').style.display = 'none';
+        document.getElementById('welcome-screen').classList.add('fade-out');
+        setTimeout(() => {
+          document.getElementById('welcome-screen').style.display = 'none';
+          document.getElementById('main-content').style.display = 'block';
+          // Start music after correct password
+          music.play().then(() => {
+            isPlaying = true;
+            musicIcon.classList.remove('fa-music');
+            musicIcon.classList.add('fa-pause');
+            heartInterval = createFloatingHearts();
+          }).catch(err => {
+            console.log("Autoplay prevented:", err);
+          });
+        }, 1000);
+      } else {
+        errorMsg.style.display = 'block';
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    document.getElementById('password-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        checkPassword();
+      }
+    });
+
+    let lastHeartTime = 0;
+    document.addEventListener('mousemove', function(e) {
+      const now = Date.now();
+      if (now - lastHeartTime > 100) {
+        const heart = document.createElement('div');
+        heart.classList.add('cursor-heart');
+        heart.style.left = `${e.clientX}px`;
+        heart.style.top = `${e.clientY}px`;
+        heart.textContent = '❤️';
+        document.body.appendChild(heart);
+        
+        heart.addEventListener('animationend', () => heart.remove());
+        lastHeartTime = now;
+      }
+    });
+
+    function createFloatingHearts() {
+      const heartInterval = setInterval(() => {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.classList.add('floating-heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.bottom = '0';
+        heart.style.setProperty('--tx', (Math.random() * 200 - 100) + 'px');
+        document.body.appendChild(heart);
+
+        heart.addEventListener('animationend', () => {
+          heart.remove();
+        });
+      }, 300);
+
+      return heartInterval;
+    }
+
+    const music = document.getElementById('bgMusic');
+    const musicIcon = document.querySelector('.music-bubble i');
+    let isPlaying = false;
+    let heartInterval;
+
+    window.addEventListener('load', () => {
+      // Only initialize the observer on load
+      document.querySelectorAll('.fade-in, .scale-in, .gallery img').forEach((el) => {
+        observer.observe(el);
+      });
+    });
+
+    function toggleMusic() {
+      if (isPlaying) {
+        music.pause();
+        musicIcon.classList.remove('fa-pause');
+        musicIcon.classList.add('fa-music');
+        clearInterval(heartInterval);
+      } else {
+        music.play();
+        musicIcon.classList.remove('fa-music');
+        musicIcon.classList.add('fa-pause');
+        heartInterval = createFloatingHearts();
+      }
+      isPlaying = !isPlaying;
+    }
+
+    // Add Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // Stop observing once visible
+        }
+      });
+    }, observerOptions);
+  </script>
+</body>
+</html>
